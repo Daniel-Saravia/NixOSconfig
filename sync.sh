@@ -63,14 +63,23 @@ create_backup() {
 pull_configs() {
     print_status "Pulling configurations from $SYSTEM_DIR to repository..."
     
-    # Create backup first
-    create_backup
+    # Create backup first (skip if no sudo)
+    if command -v sudo >/dev/null && sudo -n true 2>/dev/null; then
+        create_backup
+    else
+        print_warning "Skipping backup - sudo not available"
+    fi
     
     for file in "${CONFIG_FILES[@]}"; do
         if [[ -f "$SYSTEM_DIR/$file" ]]; then
-            sudo cp "$SYSTEM_DIR/$file" .
-            sudo chown $USER:$USER "$file"
-            print_success "Copied $file from system"
+            if cp "$SYSTEM_DIR/$file" . 2>/dev/null; then
+                print_success "Copied $file from system"
+            elif command -v sudo >/dev/null && sudo cp "$SYSTEM_DIR/$file" . 2>/dev/null; then
+                sudo chown $USER:$USER "$file"
+                print_success "Copied $file from system (with sudo)"
+            else
+                print_error "Failed to copy $file - permission denied"
+            fi
         else
             print_warning "$file not found in $SYSTEM_DIR"
         fi
