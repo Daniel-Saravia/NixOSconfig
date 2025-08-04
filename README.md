@@ -8,8 +8,9 @@ This repository contains my personal NixOS system configuration files.
 NixOSconfig/
 ├── configuration.nix       # Main system configuration
 ├── hardware-configuration.nix  # Hardware-specific settings
-├── sync.sh                 # Automated sync script
-└── README.md              # This file
+├── apps.nix               # Application configurations
+├── sync.sh                # Automated sync script
+└── README.md             # This file
 ```
 
 ## 🚀 Quick Setup

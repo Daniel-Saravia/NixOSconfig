@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 REPO_DIR="$HOME/nixos-config"
 SYSTEM_DIR="/etc/nixos"
-CONFIG_FILES=("configuration.nix" "hardware-configuration.nix")
+CONFIG_FILES=("configuration.nix" "hardware-configuration.nix" "apps.nix")
 
 # Helper functions
 print_status() {
