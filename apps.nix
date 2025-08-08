@@ -6,7 +6,7 @@
     nodejs_22
     vscode-fhs
     google-chrome
-    blender
+    (blender.override { cudaSupport = true; })
     libsecret
     libgnome-keyring
 
