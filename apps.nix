@@ -6,19 +6,8 @@
     nodejs_22
     vscode-fhs
     google-chrome
-    (blender.override { cudaSupport = true; })
+    blender
     libsecret
     libgnome-keyring
-
-    (writeScriptBin "disable-kwallet" ''
-      #!${pkgs.bash}/bin/bash
-      mkdir -p ~/.config
-      cat > ~/.config/kwalletrc << EOF
-      [Wallet]
-      Enabled=false
-      First Use=false
-      EOF
-      echo "KWallet has been disabled"
-    '')
   ];
 }
